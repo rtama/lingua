@@ -16,8 +16,11 @@ app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
+
+app.use('/static', express.static(path.join(__dirname, 'static')));
+
 // app.use('/static', express.static(path.join(__dirname, 'static')));
-app.use('/dist', express.static(path.join(__dirname, 'dist')));
+// app.use('/dist', express.static(path.join(__dirname, 'dist')));
 
 // Otherwise errors thrown in Promise routines will be silently swallowed.
 // (e.g. any error during rendering the app server-side!)
@@ -30,7 +33,7 @@ process.on('unhandledRejection', (reason, promise) => {
 });
 
 
-// catch 404 and forward to error handler
+// // catch 404 and forward to error handler
 // app.use(function(req, res, next) {
 //   var err = new Error('Not Found');
 //   err.status = 404;
@@ -50,10 +53,8 @@ app.use(function(err, req, res, next) {
 
 // Send index route to index.html 
 app.use(express.static(path.resolve(__dirname, 'dist')));
-// const indexPath = path.join(__dirname, '/dist/index.html');
 app.get('/*', function (_, res) { 
   res.sendFile(path.resolve(__dirname, 'dist'));
-  console.log("oijqoiwejg");
 });
 
 module.exports = app;
