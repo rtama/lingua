@@ -1,11 +1,15 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { Router, browserHistory, applyRouterMiddleware } from 'react-router';
+import {
+  BrowserRouter as Router,
+  Route, 
+  Link
+} from 'react-router-dom'
 
 // Import components
-import Sidebar from './components/sidebar/sidebar';
+import SidebarApp from './components/sidebar/sidebar';
 
 ReactDOM.render(
-    <Sidebar></Sidebar>,
+    <SidebarApp></SidebarApp>,
     document.getElementById('app')
-);
+)
