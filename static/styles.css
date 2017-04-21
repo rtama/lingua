@@ -1,7 +1,58 @@
-li {
-    list-style: none;
+/* General */
+
+html, #app{
+    height: 100%;
 }
 
 body {
-    font-family: arial, sans-serif;
+    font-family: Avenir, Verdana, arial, sans-serif;
+    height: 100%;
+    margin: 0px;
+}
+
+
+/* Navigation */
+.container {
+    height: 100%;
+    display: -webkit-flex;
+    display: flex;
+}
+
+.sidebar {
+    background: #1E2223;
+    flex: 1;
+    width: 40px;
+    height: 100%;
+}
+
+header {
+    color: #EEEEEE;
+    font-size: xx-large;
+    text-align: center;
+}
+
+.main {
+    background: #F5F5F5;
+    flex: 4;
+}
+
+.sidebar ul {
+    padding: 0;
+}
+
+.sidebar li {
+    list-style: none;
+    padding: 10px; 
+    margin-left: 30px;
+    margin-right: 30px;
+    border-bottom: grey solid 1px;
+}
+
+.sidebar li:hover {
+    text-decoration: underline;
+}
+
+.sidebar a {
+    text-decoration: none;
+    color:#EEEEEE;
 }

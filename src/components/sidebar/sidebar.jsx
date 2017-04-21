@@ -5,6 +5,9 @@ import {
   Link
 } from 'react-router-dom'
 
+// Declare styles and include at end
+let styles;
+
 // Iterable array of routes that the sidebar can contain
 const routes = [
   { path: '/',
@@ -21,8 +24,9 @@ const routes = [
 
 const SidebarApp = () => (
   <Router>
-    <div>
-      <div>
+    <div className='container'>
+      <div className='sidebar'>
+        <header>Lingua</header>
         <ul>
           <li><Link to='/'>Home</Link></li>
           <li><Link to='/Analyze'>Analyze</Link></li>
@@ -30,7 +34,7 @@ const SidebarApp = () => (
         </ul>
       </div>
 
-      <div>
+      <div className='main'>
         {routes.map((route, index) => (
           <Route
             key={index}
@@ -45,3 +49,7 @@ const SidebarApp = () => (
 )
 
 export default SidebarApp
+
+styles = {
+  
+}

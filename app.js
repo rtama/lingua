@@ -7,7 +7,6 @@ const logger = require('morgan');
 const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser');
 
-const port = process.env.port || 3000;
 const app = express();
 
 // uncomment after placing your favicon in /public
@@ -25,7 +24,7 @@ app.use('/static', express.static(path.join(__dirname, 'static')));
 // Otherwise errors thrown in Promise routines will be silently swallowed.
 // (e.g. any error during rendering the app server-side!)
 process.on('unhandledRejection', (reason, promise) => {
-	if (reason.stack) {
+  if (reason.stack) {
 		console.error(reason.stack);
 	} else {
 		console.error('Unhandled Rejection at: Promise ', promise, ' reason: ', reason);
@@ -53,8 +52,8 @@ app.use(function(err, req, res, next) {
 
 // Send index route to index.html 
 app.use(express.static(path.resolve(__dirname, 'dist')));
-app.get('/*', function (_, res) { 
-  res.sendFile(path.resolve(__dirname, 'dist'));
+app.get('/*', function (req, res) { 
+  res.sendFile(path.resolve(__dirname, 'dist/index.html'));
 });
 
 module.exports = app;
