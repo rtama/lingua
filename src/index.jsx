@@ -1,15 +1,15 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import {
-  BrowserRouter as Router,
-  Route, 
-  Link
+  HashRouter
 } from 'react-router-dom'
 
 // Import components
-import SidebarApp from './components/sidebar/sidebar';
+import App from './components/App/App';
 
 ReactDOM.render(
-    <SidebarApp></SidebarApp>,
+  <HashRouter>
+    <App></App>
+  </HashRouter>,
     document.getElementById('app')
 )

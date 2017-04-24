@@ -31,4 +31,7 @@ module.exports = {
     net: "empty"
   },
   devtool: '#eval-source-map'
+  // devServer: {
+  //   historyApiFallback: true
+  // }
 }
