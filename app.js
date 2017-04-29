@@ -8,7 +8,7 @@ const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser');
 
 // Import route handlers
-const api = require('./server/routes/index.js');
+const api = require('./server/routes/api.js');
 
 const app = express();
 
