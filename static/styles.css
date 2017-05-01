@@ -56,3 +56,34 @@ header {
     text-decoration: none;
     color:#EEEEEE;
 }
+
+/* Main */
+.analyze {
+    margin: 20px;
+    margin-top: 40px;
+}
+
+/* Search */
+.search_users_form {
+    text-align: center;
+}
+
+.search_users_form input {
+     box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    outline: none;
+    background: transparent;
+    border: none;
+    border-bottom: 1px solid #ddd;
+    height: 40px;
+    font: 16px Avenir, Verdana, sans-serif;
+}
+
+input:focus {
+    border-bottom: 1px solid #7986CB;
+}
+
+#search-header {
+    font-size: 1.3em;
+}

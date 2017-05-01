@@ -1,5 +1,9 @@
 import React from 'react';
 import fetch from 'isomorphic-fetch';
+import Route from 'react-router-dom';
+
+// import child components
+import Search from '../Search/Search';
 
 
 class WordFrequency extends React.Component {
@@ -16,9 +20,12 @@ class WordFrequency extends React.Component {
     });
   }
 
+  searchSubmit(user_value) {
+    console.log(user_value);
+  }
+   
   render() {
     let users = []
-
     this.state.users.forEach((user) => {
       users.push(
         <div key={user.id}>{user.firstName} {user.lastName}</div>
@@ -26,9 +33,10 @@ class WordFrequency extends React.Component {
     })
 
     return (
-    <h2>
-      This is the message: {users}
-    </h2>)
+      <div className='analyze'>
+        <Search searchSubmit={this.searchSubmit}></Search>
+      </div>
+    )
   }
 }
 
