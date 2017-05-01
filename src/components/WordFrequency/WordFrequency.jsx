@@ -28,35 +28,37 @@ class WordFrequency extends React.Component {
   }
 
   // Get results of userValue from search 
+  // Match if searchValue is within username or concatenated fullname
   getResults(userValue) {
+    let concatValue = userValue.replace(/\s/g, "").toLowerCase();
+    if (concatValue.length == 0) {return []}
     return this.state.users.filter((user) => {
-      return (user.username.includes(userValue) || user.firstName.includes(userValue) || user.lastName.includes(userValue))
+      let fullName = (user.firstName + user.lastName).toLowerCase();
+      return user.username.includes(concatValue) || fullName.includes(concatValue)
      });
   }
 
   // Callback for search component when form is submitted
   // Returns input for user search
   searchSubmit(userValue) {
-    this.setState({userValue: userValue});
-    console.log(userValue);
-    console.log(this.state.users);
-    console.log(this.getResults(userValue));
-    this.setState({userResults: this.getResults(userValue)})
+    this.setState({
+        userValue: userValue,
+        userResults: this.getResults(userValue)
+      });
   }
    
   render() {
-    let results = []
-    this.state.userResults.forEach((user) => {
-      results.push(
-        <div key={user.id}>{user.firstName} {user.lastName}</div>
-      )
-    })
+    // let results = []
+    // this.state.userResults.forEach((user) => {
+    //   results.push(
+    //     <div key={user.id}>{user.firstName} {user.lastName}</div>
+    //   )
+    // })
 
     return (
       <div className='analyze'>
         <Search searchSubmit={this.searchSubmit}></Search>
-        
-        <SearchResultsDisplay userValue={results}></SearchResultsDisplay>
+        <SearchResultsDisplay userResults={this.state.userResults}></SearchResultsDisplay>
       </div>
     )
   }
