@@ -18,13 +18,6 @@ class Search extends React.Component {
   }
 
   render() {
-    // let users = []
-    // this.props.users.forEach((user) => {
-    //   users.push(
-    //     <div key={user.id}>{user.firstName} {user.lastName}</div>
-    //   )
-    // })
-    
     return (
       <div className='search_users_form'>
         <p id='search-header'>Who would you like to analyze?</p>
