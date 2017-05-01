@@ -1,16 +1,15 @@
 import React from 'react';
 
-
 class SearchResultsDisplay extends React.Component {
   constructor(props) {
     super(props);
     this.handleClick = this.handleClick.bind(this);
   }
 
-
   // event handler for click on table row
   handleClick(user) {
-    console.log("handler")      
+    console.log(user);
+    console.log("handler");
   }
 
   render() {
@@ -28,14 +27,11 @@ class SearchResultsDisplay extends React.Component {
     
     this.props.userResults.forEach((user) => {
       tableUsers.push(
-        <tr key={user.id} className='data_rows' onClick={this.handleClick(user)}>
-          <td>{user.username}</td>
-          <td>{user.firstName}</td>
-          <td>{user.lastName}</td>
-        </tr>
-      ) 
+        <SearchResultsDisplayItem key={user.id} user={user} handleClick={this.handleClick}>
+        </SearchResultsDisplayItem> 
+      )
     })
-    
+
     return (
       <div className="table_wrapper">
         <table className="user_search_table"><tbody>{tableUsers}</tbody></table>
@@ -44,5 +40,29 @@ class SearchResultsDisplay extends React.Component {
   }
 }
 
+// Split items into own component to decrease render time
+class SearchResultsDisplayItem extends React.Component {
+  constructor(props) {
+    super(props);
+    this._onClick = this._onClick.bind(this); 
+  } 
 
-export default SearchResultsDisplay;
+  _onClick() {
+    this.props.handleClick(this.props.user);
+  }
+
+  render() {
+    return (
+      <tr className='data_rows' onClick={this._onClick}>
+        <td>{this.props.user.username}</td> 
+        <td>{this.props.user.firstName}</td> 
+        <td>{this.props.user.lastName}</td> 
+      </tr>
+    ) 
+  }
+}
+
+export {
+  SearchResultsDisplay,
+  SearchResultsDisplayItem
+}

@@ -4,7 +4,7 @@ import Route from 'react-router-dom';
 
 // import child components
 import Search from '../Search/Search';
-import SearchResultsDisplay from '../SearchResultsDisplay/SearchResultsDisplay';
+import { SearchResultsDisplay } from '../SearchResultsDisplay/SearchResultsDisplay';
 
 class WordFrequency extends React.Component {
   constructor(props) {
