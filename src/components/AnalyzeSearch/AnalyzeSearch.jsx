@@ -6,7 +6,7 @@ import Route from 'react-router-dom';
 import Search from '../Search/Search';
 import { SearchResultsDisplay } from '../SearchResultsDisplay/SearchResultsDisplay';
 
-class WordFrequency extends React.Component {
+class AnalyzeSearch extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -48,13 +48,6 @@ class WordFrequency extends React.Component {
   }
    
   render() {
-    // let results = []
-    // this.state.userResults.forEach((user) => {
-    //   results.push(
-    //     <div key={user.id}>{user.firstName} {user.lastName}</div>
-    //   )
-    // })
-
     return (
       <div className='analyze'>
         <Search searchSubmit={this.searchSubmit}></Search>
@@ -64,4 +57,4 @@ class WordFrequency extends React.Component {
   }
 }
 
-export default WordFrequency;
+export default AnalyzeSearch;

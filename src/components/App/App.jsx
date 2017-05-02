@@ -5,7 +5,7 @@ import {
 } from 'react-router-dom'
 
 // Import child components
-import WordFrequency from '../WordFrequency/WordFrequency'
+import AnalyzeSearch from '../AnalyzeSearch/AnalyzeSearch';
 
 // Declare styles and include at end
 let styles;
@@ -17,7 +17,7 @@ const routes = [
     main: () => <h2>Home</h2>
   },
   { path: '/Analyze',
-    main: WordFrequency
+    main: AnalyzeSearch 
   },
   { path: '/Compare', 
     main: () => <h2>Compare</h2>
@@ -35,7 +35,7 @@ const App = () => (
       </ul>
     </div>
 
-    <div className='main'>
+  <div className='main'>
       {routes.map((route, index) => (
         <Route
           key={index}

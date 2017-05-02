@@ -1,15 +1,17 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import {
-  HashRouter
+  BrowserRouter
 } from 'react-router-dom'
 
 // Import components
 import App from './components/App/App';
 
 ReactDOM.render(
-  <HashRouter>
+  // <HashRouter>
+  <BrowserRouter>
     <App></App>
-  </HashRouter>,
+  </BrowserRouter>,
+  // </HashRouter>,
     document.getElementById('app')
 )

@@ -8,8 +8,9 @@ class SearchResultsDisplay extends React.Component {
 
   // event handler for click on table row
   handleClick(user) {
+    console.log(this.props);
+    // this.props.route.push('/searchUser');
     console.log(user);
-    console.log("handler");
   }
 
   render() {
