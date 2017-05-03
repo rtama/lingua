@@ -29,13 +29,13 @@ const App = () => (
     <div className='sidebar'>
       <header>Lingua</header>
       <ul>
-        <li><Link to='/' replace>Home</Link></li>
-        <li><Link to='/Analyze' replace>Analyze</Link></li>
-        <li><Link to='/Compare' replace>Compare</Link></li>
+        <li><Link to='/' >Home</Link></li>
+        <li><Link to='/Analyze' >Analyze</Link></li>
+        <li><Link to='/Compare' >Compare</Link></li>
       </ul>
     </div>
 
-  <div className='main'>
+    <div className='main'>
       {routes.map((route, index) => (
         <Route
           key={index}

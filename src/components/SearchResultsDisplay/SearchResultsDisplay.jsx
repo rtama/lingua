@@ -8,13 +8,14 @@ class SearchResultsDisplay extends React.Component {
 
   // event handler for click on table row
   handleClick(user) {
-    console.log(this.props);
-    // this.props.route.push('/searchUser');
+    console.log("sesarch results display props: ", this.props);
+    this.props.history.push('/searchUser');
     console.log(user);
   }
 
   render() {
     let tableUsers = [];
+    console.log(this.props);
 
     // only set headers if there is a result
     if (this.props.userResults.length > 0) {

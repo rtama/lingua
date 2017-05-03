@@ -8,10 +8,8 @@ import {
 import App from './components/App/App';
 
 ReactDOM.render(
-  // <HashRouter>
   <BrowserRouter>
     <App></App>
   </BrowserRouter>,
-  // </HashRouter>,
-    document.getElementById('app')
+  document.getElementById('app')
 )

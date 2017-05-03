@@ -1,6 +1,8 @@
 import React from 'react';
 import fetch from 'isomorphic-fetch';
-import Route from 'react-router-dom';
+import  {
+  Route
+} from 'react-router-dom';
 
 // import child components
 import Search from '../Search/Search';
@@ -48,13 +50,22 @@ class AnalyzeSearch extends React.Component {
   }
    
   render() {
+    const SearchProps = [
+      {searchSubmit: this.searchSubmit} 
+    ]
+    const SearchResultsDisplayProps = [
+      {userResults: this.state.userResults}
+    ]
+    
     return (
       <div className='analyze'>
-        <Search searchSubmit={this.searchSubmit}></Search>
-        <SearchResultsDisplay userResults={this.state.userResults}></SearchResultsDisplay>
+        <Route path='/Analyze' render={() => <Search {...this.props} searchSubmit={this.searchSubmit}></Search>} />
+        <Route path='/Analyze' render={() => <SearchResultsDisplay {...this.props} userResults={this.state.userResults}></SearchResultsDisplay> }/>
       </div>
     )
   }
 }
-
+        // <Search searchSubmit={this.searchSubmit}></Search>
+        // <SearchResultsDisplay userResults={this.state.userResults}></SearchResultsDisplay>
+        
 export default AnalyzeSearch;
