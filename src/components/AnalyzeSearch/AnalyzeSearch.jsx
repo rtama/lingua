@@ -50,13 +50,6 @@ class AnalyzeSearch extends React.Component {
   }
    
   render() {
-    const SearchProps = [
-      {searchSubmit: this.searchSubmit} 
-    ]
-    const SearchResultsDisplayProps = [
-      {userResults: this.state.userResults}
-    ]
-    
     return (
       <div className='analyze'>
         <Route path='/Analyze' render={() => <Search {...this.props} searchSubmit={this.searchSubmit}></Search>} />

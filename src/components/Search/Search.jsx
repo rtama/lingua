@@ -1,5 +1,7 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
+// Component rendering the search bar over users
 class Search extends React.Component {
   constructor(props) {
     super(props);
@@ -33,6 +35,10 @@ class Search extends React.Component {
       </div>
     )
   }
+}
+
+Search.propTypes = {
+  searchSubmit: PropTypes.func 
 }
 
 export default Search;

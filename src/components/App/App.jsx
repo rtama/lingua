@@ -7,9 +7,6 @@ import {
 // Import child components
 import AnalyzeSearch from '../AnalyzeSearch/AnalyzeSearch';
 
-// Declare styles and include at end
-let styles;
-
 // Iterable array of routes that the sidebar can contain
 const routes = [
   { path: '/',

@@ -1,21 +1,22 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
+// Component for the display table of the search results over users
 class SearchResultsDisplay extends React.Component {
   constructor(props) {
     super(props);
     this.handleClick = this.handleClick.bind(this);
   }
-
+  
   // event handler for click on table row
   handleClick(user) {
-    console.log("sesarch results display props: ", this.props);
+    console.log("search results display props: ", this.props);
     this.props.history.push('/searchUser');
-    console.log(user);
+    console.log("user: ", user);
   }
 
   render() {
     let tableUsers = [];
-    console.log(this.props);
 
     // only set headers if there is a result
     if (this.props.userResults.length > 0) {
@@ -42,7 +43,7 @@ class SearchResultsDisplay extends React.Component {
   }
 }
 
-// Split items into own component to decrease render time
+// Split items of the display into own component to decrease render time
 class SearchResultsDisplayItem extends React.Component {
   constructor(props) {
     super(props);
@@ -62,6 +63,17 @@ class SearchResultsDisplayItem extends React.Component {
       </tr>
     ) 
   }
+}
+
+// Proptypes for classes
+SearchResultsDisplay.propTypes = {
+  userResults: PropTypes.array,
+  history: PropTypes.object
+}
+
+SearchResultsDisplayItem.propTypes = {
+  user: PropTypes.object,
+  handleClick: PropTypes.func
 }
 
 export {
