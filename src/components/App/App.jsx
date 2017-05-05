@@ -6,20 +6,21 @@ import {
 
 // Import child components
 import AnalyzeSearch from '../AnalyzeSearch/AnalyzeSearch';
-import { Analyze } from '../Analyze/Analyze';
+import Analyze from '../Analyze/Analyze';
+import Home from '../Home/Home';
 
 // Iterable array of routes that the sidebar can contain
 const routes = [
   { path: '/',
     exact: true,
-    main: () => <h2>Home</h2>
+    main: Home
   },
   { path: '/search',
     exact: true,
     main: AnalyzeSearch
   },
   {
-    path: '/analyze',
+    path: '/analyze/:userid',
     exact: false,
     main: Analyze 
   }
@@ -48,4 +49,4 @@ const App = () => (
   </div>
 )
 
-export default App
+export default App;

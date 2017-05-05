@@ -10,6 +10,9 @@ body {
     margin: 0px;
 }
 
+a {
+    text-decoration: none;
+}
 
 /* Navigation */
 .container {
@@ -54,7 +57,6 @@ header {
 }
 
 .sidebar a {
-    text-decoration: none;
     color:#EEEEEE;
 }
 
@@ -62,6 +64,49 @@ header {
 .analyze_search {
     margin: 20px;
     margin-top: 40px;
+}
+
+/* Home */
+.home_page {
+    text-align: center;
+}
+
+.home_page .title {
+    font-size: xx-large;
+    margin: 20px;
+}
+
+.heading {
+    margin: 20px;
+}
+
+.heading > span {
+    color: #BDBDBD;
+}
+
+.start-button {
+    border: 1px solid black;
+    border-radius: 10px;
+    display: inline-block;
+}
+
+img {
+    background-color: #1E2223;
+    max-height: 100px;
+    max-width: 100px;
+}
+
+.about {
+    display: -webkit-flex;
+    display: flex;
+}
+
+.pubpub-left {
+    flex: 2;
+}
+
+.pubpub-right {
+    flex: 1;
 }
 
 /* Search */
