@@ -9,7 +9,6 @@ const bodyParser = require('body-parser');
 
 // Import route handlers
 const api = require('./server/routes/api.js');
-
 const app = express();
 
 // uncomment after placing your favicon in /public
@@ -34,9 +33,9 @@ process.on('unhandledRejection', (reason, promise) => {
 app.use('/api', api);
 
 // Send index route to index.html 
-app.use(express.static(path.resolve(__dirname, 'dist')));
+app.use(express.static(__dirname + '/dist'));
 app.get('*', function (req, res) { 
-  res.sendFile(path.resolve(__dirname, 'dist/index.html'));
+  res.sendFile(path.join(__dirname, 'dist/index.html'));
 });
 
 module.exports = app;

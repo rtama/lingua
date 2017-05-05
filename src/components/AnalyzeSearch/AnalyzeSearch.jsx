@@ -13,7 +13,6 @@ class AnalyzeSearch extends React.Component {
     super(props);
     this.state = {
       users: [],
-      showSearchResults: false,
       userValue: '',
       userResults: []
     }
@@ -51,14 +50,12 @@ class AnalyzeSearch extends React.Component {
    
   render() {
     return (
-      <div className='analyze'>
-        <Route path='/Analyze' render={() => <Search {...this.props} searchSubmit={this.searchSubmit}></Search>} />
-        <Route path='/Analyze' render={() => <SearchResultsDisplay {...this.props} userResults={this.state.userResults}></SearchResultsDisplay> }/>
+      <div className='analyze_search'>
+        <Route path='/search' render={() => <Search {...this.props} searchSubmit={this.searchSubmit}></Search>} />
+        <Route path='/search' render={() => <SearchResultsDisplay {...this.props} userResults={this.state.userResults}></SearchResultsDisplay> }/>
       </div>
     )
   }
 }
-        // <Search searchSubmit={this.searchSubmit}></Search>
-        // <SearchResultsDisplay userResults={this.state.userResults}></SearchResultsDisplay>
         
 export default AnalyzeSearch;
