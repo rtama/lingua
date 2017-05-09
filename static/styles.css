@@ -101,11 +101,11 @@ img {
     display: flex;
 }
 
-.pubpub-left {
+.pubpub_left {
     flex: 2;
 }
 
-.pubpub-right {
+.pubpub_right {
     flex: 1;
 }
 
@@ -132,7 +132,7 @@ input:focus {
 }
 
 
-#search-header {
+#search_header {
     font-size: 1.3em;
     margin-bottom: 10px;
 }
@@ -162,4 +162,13 @@ td {
 
 th {
     font-weight: normal;
+}
+
+/* Analyze */
+.analyze_header {
+    text-align: center;
+}
+
+.analyze_user {
+    font-size: x-large;
 }

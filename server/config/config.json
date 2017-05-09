@@ -2,7 +2,7 @@
   "development": {
     "username": "reecetamashiro",
     "password": null,
-    "database": "lingua",
+    "database": "pubpubdata",
     "host": "127.0.0.1",
     "dialect": "postgres"
   },
@@ -16,8 +16,8 @@
   "production": {
     "username": "root",
     "password": null,
-    "database": "database_production",
+    "database": "lingua",
     "host": "127.0.0.1",
-    "dialect": "mysql"
+    "dialect": "postgres"
   }
 }

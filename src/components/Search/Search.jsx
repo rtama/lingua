@@ -22,7 +22,7 @@ class Search extends React.Component {
   render() {
     return (
       <div className='search_users_form'>
-        <p id='search-header'>Who would you like to analyze?</p>
+        <p id='search_header'>Who would you like to analyze?</p>
         <form onSubmit={this.handleSubmit}>
           <input 
             type='text' 

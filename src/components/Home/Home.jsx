@@ -18,10 +18,10 @@ class Home extends React.Component {
           <div className='start-button'>Explore</div>
         </div>
         <div className='about' >
-          <div className='pubpub-left' >
+          <div className='pubpub_left' >
             This project was influenced by <a href="http://www.pubpub.org">PubPub</a>. Check it out!
           </div>
-          <div className='pubpub-right' >
+          <div className='pubpub_right' >
             <img src='../../../static/imgs/pubpublogo.png'/>
           </div>
         </div>
