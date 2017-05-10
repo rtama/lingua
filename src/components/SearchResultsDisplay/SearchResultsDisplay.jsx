@@ -10,9 +10,7 @@ class SearchResultsDisplay extends React.Component {
   
   // event handler for click on table row
   handleClick(user) {
-    // console.log("search results display props: ", this.props);
     this.props.history.push('/analyze/' + user.id);
-    console.log("user: ", user);
   }
 
   render() {
