@@ -12,11 +12,14 @@ class Home extends React.Component {
   render() {
     return (
       <div className='home_page'>
-        <div className='heading'>
+        <div className='landing'>
           <div className='title'>Lingua</div>
-          <span>Dwell in the data or discover similar authors and publications</span>
-          <div className='start-button'>Explore</div>
+          <div className='subtitle'>Explore | Discover</div>
+          <div className='button-container'>
+            <div className='start-button'>Begin</div>
+          </div>
         </div>
+        
         <div className='about' >
           <div className='pubpub_left' >
             This project was influenced by <a href="http://www.pubpub.org">PubPub</a>. Check it out!
@@ -25,11 +28,8 @@ class Home extends React.Component {
             <img src='../../../static/imgs/pubpublogo.png'/>
           </div>
         </div>
-        <div>
-        </div>
       </div>
     )
-
   }
 }
 

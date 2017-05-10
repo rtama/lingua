@@ -1,5 +1,4 @@
 /* General */
-
 html, #app{
     height: 100%;
 }
@@ -75,22 +74,43 @@ header {
 }
 
 .home_page .title {
-    font-size: xx-large;
-    margin: 20px;
+    font-size: 1000%;
+    position: relative;
+    top: 20%;
+    opacity: 0;
+    -webkit-animation: fadein 2s ease-out .5s forwards;
+       -moz-animation: fadein 2s ease-out .5s forwards;
+            animation: fadein 2s ease-out .5s forwards;
 }
 
-.heading {
-    margin: 20px;
+@keyframes fadein {
+    from { opacity: 0; }
+     to  { opacity: 1; }
+    
 }
 
-.heading > span {
+.landing {
+    height: 100vh;
+}
+
+.landing > .subtitle {
+    position: relative;
     color: #BDBDBD;
+    font-size: 150%;
+    top: 20%;
+}
+
+.button-container {
+    position: relative;
+    top: 20%;
 }
 
 .start-button {
-    border: 1px solid black;
+    border: 3px solid black;
     border-radius: 10px;
     display: inline-block;
+    background-color: #455A64;
+    color: white;
 }
 
 img {
