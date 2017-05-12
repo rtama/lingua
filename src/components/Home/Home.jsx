@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import {
   Route, 
   Link
@@ -7,6 +8,12 @@ import {
 class Home extends React.Component {
   constructor(props) {
     super(props);
+    this.handleClick = this.handleClick.bind(this);
+  }
+
+  // on begin button click send to search component
+  handleClick() {
+    this.props.history.push('/search');
   }
 
   render() {
@@ -16,7 +23,7 @@ class Home extends React.Component {
           <div className='title'>Lingua</div>
           <div className='subtitle'>Explore | Discover</div>
           <div className='button-container'>
-            <div className='start-button'>Begin</div>
+            <div className='start-button' onClick={this.handleClick}>Begin <i className="fa fa-chevron-right" aria-hidden="true"></i></div>
           </div>
         </div>
         
@@ -28,9 +35,14 @@ class Home extends React.Component {
             <img src='../../../static/imgs/pubpublogo.png'/>
           </div>
         </div>
+        
       </div>
     )
   }
+}
+
+Home.propTypes = {
+  history: PropTypes.object
 }
 
 export default Home;

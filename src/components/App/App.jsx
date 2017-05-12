@@ -5,7 +5,7 @@ import {
 } from 'react-router-dom';
 
 // Import child components
-import AnalyzeSearch from '../AnalyzeSearch/AnalyzeSearch';
+import Search from '../Search/Search';
 import Analyze from '../Analyze/Analyze';
 import Home from '../Home/Home';
 
@@ -17,7 +17,7 @@ const routes = [
   },
   { path: '/search',
     exact: true,
-    main: AnalyzeSearch
+    main: Search
   },
   {
     path: '/analyze/:userid',
@@ -26,16 +26,13 @@ const routes = [
   }
 ]
 
-const App = () => (
-  <div className='container'>
-    <div className='sidebar'>
-      <header>Lingua</header>
-      <ul>
-        <li><Link to='/' >Home</Link></li>
-        <li><Link to='/search' >Analyze</Link></li>
-      </ul>
-    </div>
+class App extends React.Component {
+  constructor(props) {
+    super(props)
+  }
 
+  render() {
+    return (
     <div className='main'>
       {routes.map((route, index) => (
         <Route
@@ -46,7 +43,8 @@ const App = () => (
           />
       ))}
     </div>
-  </div>
-)
+    )
+  }
+}
 
 export default App;

@@ -9,6 +9,13 @@ import {
 // import child components
 import WordFrequency from '../WordFrequency/WordFrequency';
 
+// Routes for tools
+const routes = [
+  { path: '/analyze/:userid/wordfrequency',
+    exact: true,
+    component: WordFrequency
+  }
+]
 
 // Main Analysis component 
 class Analyze extends React.Component {
@@ -28,16 +35,9 @@ class Analyze extends React.Component {
   }
 
   render(){
-    const routes = [
-      { path: '/analyze/:userid/wordfrequency',
-        exact: true,
-        component: WordFrequency
-      }
-    ]
-    
     return (
       <div className='analyze'>
-        <div className='tools_list'>
+        <div className='tools_list sidebar'>
           <ul>
             <li><Link to={`${this.props.match.url}/wordfrequency`}>Word Frequency</Link></li>
           </ul>
@@ -62,7 +62,6 @@ class Analyze extends React.Component {
     )
   }
 }
-
 
 Analyze.propTypes = {
   match: PropTypes.object

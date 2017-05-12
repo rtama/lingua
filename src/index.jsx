@@ -6,6 +6,7 @@ import {
 
 // Import components
 import App from './components/App/App';
+import Home from './components/Home/Home';
 
 ReactDOM.render(
   <BrowserRouter>

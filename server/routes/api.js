@@ -21,6 +21,20 @@ router.get('/user/:userid', function(req, res) {
     })
 });
 
+// Recurse through the file Contents object to pull out all text
+let pullText = function(fileContents) {
+    let files = []
+    for (let i=0; i<fileContents.length; i++) {
+        if (fileContents[i].hasOwnProperty('text')) {
+            files.push(fileContents[i].text)
+        } else if (fileContents[i].hasOwnProperty('content')) {
+            files.push(pullText(fileContents[i].content))
+        }
+    }
+    return files
+}
+
+// Return all content for a given user. 
 router.get('/pubs/user/:userid', function(req, res) {
     models.Contributor.findAll({
         where: {
@@ -39,37 +53,66 @@ router.get('/pubs/user/:userid', function(req, res) {
             }));
         })
         
+        // after all pubs found for contributor, look for versions
         models.sequelize.Promise.all(promises).then(function(pubs) {
-            let names = pubs.filter(function(pub) {
-                if (pub) {return pub}
-            }).map(function(pub) {
-                if (pub) {
-                    return pub.title
-                }
-            }) 
-            res.send(names);
+            // filter out the discussions from pubs
+            let filteredPubs = pubs.filter(function(pub) {
+                if (pub && !pub.title.includes('Discussion')) {return pub}
+            })
+
+            let versionPromises= []
+            filteredPubs.forEach(function(pub) {
+                versionPromises.push(models.Version.findAll({
+                    limit: 1,
+                    where: {
+                        pubId: pub.id
+                    },
+                    order: [['createdAt', 'DESC']]
+                }))
+            })
+            
+            // After all versions found, query for files
+            models.sequelize.Promise.all(versionPromises).then(function(versions) {
+                // squash the versions into one array
+                let squashedVersions = [].concat.apply([], versions)
+                let versionFilePromises = []
+                squashedVersions.forEach(function(version) {
+                    // console.log("\n version: \n ", version[0].id)
+                    versionFilePromises.push(models.VersionFile.findAll({
+                        where: {
+                            versionId: version.id 
+                        }
+                    }))
+                })
+
+                // After find all versionfiles go to files
+                models.sequelize.Promise.all(versionFilePromises).then(function(versionFiles) {
+                    let squashed = [].concat.apply([], versionFiles)
+                    let filePromises = []
+
+                    squashed.forEach(function(versionFile) {
+                        filePromises.push(models.File.findById(versionFile.fileId)) 
+                    })
+                    
+                    // filter files and map to content
+                    models.sequelize.Promise.all(filePromises).then(function(files) {
+                        // filter files for main.ppub
+                        let filteredFiles = files.filter(function(file) {
+                            if (file.name == 'main.ppub'){ return file }
+                        })
+                        let fileContents = filteredFiles.map(function(file) {
+                            return JSON.parse(file.content)
+                        })
+                        let allText = pullText(fileContents) 
+                        res.send(allText) 
+                        // res.send(fileContents)
+                    })
+                })
+            })
         })
     })
-        
-        // contributors.map(function(contributor) {
-        //     models.Version.findAll({
-        //         where: {
-        //             pubId: contributor.pubId
-        //         }
-        //     })
-        //     contributor.pubId
-        // })
-        // for (let i=0; i<contributors.length; i++) {
+ })
 
-        //     contributors[i].pubId
-        // }
-        // res.send(contributors);
-        // res.send(contributors.forEach(function(contributor) {
-        //     let pub = models.Pub.findById(contributor.pubId).then(function(pub) {
-        //         return pub;
-        //     });
-        //     return pub;
-        // }))
- });
+
 
 module.exports = router;
