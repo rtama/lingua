@@ -9,14 +9,6 @@ import {
 // import child components
 import WordFrequency from '../WordFrequency/WordFrequency';
 
-// Routes for tools
-const routes = [
-  { path: '/analyze/:userid/wordfrequency',
-    exact: true,
-    component: WordFrequency
-  }
-]
-
 // Main Analysis component 
 class Analyze extends React.Component {
   constructor(props) {
@@ -47,14 +39,7 @@ class Analyze extends React.Component {
             <p className='analyze_user'>{this.state.user.firstName} {this.state.user.lastName}</p> 
           </div>
           <div className='tools'>
-            {routes.map((route, index) => (
-              <Route 
-                key={index}
-                path={route.path}
-                exact={route.exact}
-                component={routes.component}
-              /> 
-            ))}
+            <Route path='/analyze/:userid/wordfrequency' render={() => <WordFrequency {...this.props}></WordFrequency>} />
           </div>
         </div>
       </div>

@@ -103,10 +103,8 @@ router.get('/pubs/user/:userid', function(req, res) {
                         let fileContents = filteredFiles.map(function(file) {
                             return JSON.parse(file.content)
                         })
-                        // let squashedText = [].concat.apply([], pullText(fileContents))
-                        // res.send(squashedText) 
-                        let text = pullText(fileContents)
-                        res.send(text)
+                        let textArray = pullText(fileContents)
+                        res.send(textArray)
                     })
                 })
             })

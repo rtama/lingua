@@ -28,8 +28,13 @@ class AnalyzeSearch extends React.Component {
     });
   }
 
-  // Get results of userValue from search 
-  // Match if searchValue is within username or concatenated fullname
+  /**
+   * 
+   * Get results from userValue from search, returns boolean value if userValue in users
+   * @param {any} userValue 
+   * @returns {boolean}
+   * @memberOf AnalyzeSearch
+   */
   getResults(userValue) {
     let concatValue = userValue.replace(/\s/g, "").toLowerCase();
     if (concatValue.length == 0) {return []}
@@ -39,8 +44,12 @@ class AnalyzeSearch extends React.Component {
      });
   }
 
-  // Callback for search component when form is submitted
-  // Returns input for user search
+
+  /**
+   * Callback for search component when form is submitted. Sets state userValue and userResults
+   * @param {any} userValue 
+   * @memberOf AnalyzeSearch
+   */
   searchSubmit(userValue) {
     this.setState({
         userValue: userValue,

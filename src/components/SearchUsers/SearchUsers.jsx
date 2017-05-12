@@ -47,7 +47,7 @@ class SearchUsers extends React.Component {
 
 SearchUsers.propTypes = {
   searchSubmit: PropTypes.func,
-  history: PropTypes.obj
+  history: PropTypes.object
 }
 
 export default SearchUsers;
