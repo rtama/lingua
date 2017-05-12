@@ -32,7 +32,11 @@ class Home extends React.Component {
         
         <div className='about' >
           <div className='pubpub_left' >
-            This project was influenced by <a href="http://www.pubpub.org">PubPub</a>. Check it out!
+            <div>
+              <div className='description_top'>This project gets it's data from PubPub <a href="http://www.pubpub.org">Check it out!</a></div>
+              <div className='description_bottom'>PubPub is a free and open tool for collaborative editing, instant publishing,
+               continuous review, and grassroots journals</div>
+            </div>
           </div>
           <div className='pubpub_right' >
             <img src='../../../static/imgs/pubpublogo.png'/>
