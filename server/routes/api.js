@@ -22,11 +22,12 @@ router.get('/user/:userid', function(req, res) {
 });
 
 // Recurse through the file Contents object to pull out all text
+// Sets text to lower case
 let pullText = function(fileContents) {
     let files = []
     for (let i=0; i<fileContents.length; i++) {
         if (fileContents[i].hasOwnProperty('text')) {
-            files.push(fileContents[i].text)
+            files.push(fileContents[i].text.toLowerCase())
         } else if (fileContents[i].hasOwnProperty('content')) {
             files.push(pullText(fileContents[i].content))
         }

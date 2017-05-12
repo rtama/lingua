@@ -1,10 +1,10 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import fetch from 'isomorphic-fetch'
-
+import stopwords from 'stopwords'
 
 /** 
- * Pruned word frequency dictionary (>1 occurence) 
+ * Pruned word frequency dictionary (>1 occurence) and reduce stopwords
  * 
  * @param {array<string>} wordsArray
  * @returns {object} 
@@ -23,9 +23,9 @@ function getWordFreq(wordsArray) {
   }
   // prune out one count words
   let prunedWordFreq = {}
-  let keys = Object.keys(wordFreq)
+  let keys= Object.keys(wordFreq)
   keys.forEach((key) => {
-    if (wordFreq[key] > 1) {
+    if (wordFreq[key] > 1 && key != "" && !(stopwords.english.includes(key))) {
       prunedWordFreq[key] = wordFreq[key]
     } 
   })
@@ -40,14 +40,19 @@ function getWordFreq(wordsArray) {
  * @returns {array}
  */
 function getKMostFreq(wordDict, k) {
-  
+  let keys = Object.keys(wordDict)
+  let sorted = keys.sort((a, b) => {
+    return wordDict[b] - wordDict[a]
+  })
+  return sorted.splice(0, k)  
 }
 
 class WordFrequency extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      wordFrequencies: {}
+      prunedWordFrequencies: {},
+      mostFrequent: []
     }
   }
 
@@ -56,17 +61,27 @@ class WordFrequency extends React.Component {
       return response.json()
     }).then((response) => {
       let prunedWordFreq = getWordFreq(response)
-
-      // let keys = Object.keys(prunedWordFreq) 
-      // console.log("total length: ", keys.length)
-      // this.setState({wordFrequencies: prunedWordFreq})
+      let kFreq = getKMostFreq(prunedWordFreq, 10)  
+      this.setState({
+        prunedWordFrequencies: prunedWordFreq,
+        mostFrequent: kFreq 
+      }) 
     })
   }
 
   render() {
+    let wordFrequencies = []
+    if (this.state.mostFrequent.length > 0) {
+      this.state.mostFrequent.forEach((word, index) => {
+        wordFrequencies.push(
+          <div key={index}>{word}: {this.state.prunedWordFrequencies[word]}</div>
+        )
+      })
+    }
+
     return (
-      <div>
-        <p>word frequency</p>
+      <div className='wordFrequencies'>
+        {wordFrequencies}
       </div>      
     )
   }
