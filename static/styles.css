@@ -5,6 +5,7 @@ html, #app{
 
 body {
     background: #FAFAFA;
+    /*background: #E0F7FA;*/
     font-family: Avenir, Verdana, arial, sans-serif;
     height: 100%;
     margin: 0px;
@@ -61,31 +62,56 @@ header {
     position: relative;
     top: 20%;
     opacity: 0;
-    -webkit-animation: fadein 2s ease-out .5s forwards;
-       -moz-animation: fadein 2s ease-out .5s forwards;
-            animation: fadein 2s ease-out .5s forwards;
+    -webkit-animation: fadein_down 1s ease-out .5s forwards;
+       -moz-animation: fadein_down 1s ease-out .5s forwards;
+            animation: fadein_down 1s ease-out .5s forwards;
 }
 
-@keyframes fadein {
-    from { opacity: 0; }
-     to  { opacity: 1; }
-    
+@-webkit-keyframes fadein_down {
+    from { opacity: 0; top: 15%}
+     to  { opacity: 1; top: 20%}
+}
+@-moz-keyframes fadein_down {
+    from { opacity: 0; top: 15%}
+     to  { opacity: 1; top: 20%}
+}
+@keyframes fadein_down {
+    from { opacity: 0; top: 17%}
+     to  { opacity: 1; top: 20%}
 }
 
 .landing {
     height: 100vh;
 }
 
-.landing > .subtitle {
+.subtitle {
     position: relative;
     color: #BDBDBD;
     font-size: 150%;
     top: 20%;
+    opacity: 0;
+    animation: fadein 1s ease-out 1s forwards;
+}
+
+@-webkit-keyframes fadein {
+    from { opacity: 0}
+    to   { opacity: 1}
+}
+
+@-moz-keyframes fadein {
+    from { opacity: 0}
+    to   { opacity: 1}
+}
+
+@keyframes fadein {
+    from { opacity: 0}
+    to   { opacity: 1}
 }
 
 .button-container {
     position: relative;
     top: 25%;
+    animation: fadein_up 1s ease-out 1.5s forwards;
 }
 
 .start-button {
@@ -94,8 +120,36 @@ header {
     font-size: 1.3em;
     border-radius: 2px;
     display: inline-block;
-    background-color: #757575;
-    color: white;
+    background-color: #006064;
+    color: #FAFAFA;
+    overflow: hidden;
+    width: 90px;
+    opacity: 0;
+    -webkit-transition: all 0.5s ease;
+       -moz-transition: all 0.5s ease;
+            transition: all 0.5s ease;
+    
+    -webkit-animation: fadein 1s ease-out 1.5s forwards;
+       -moz-animation: fadein 1s ease-out 1.5s forwards;
+            animation: fadein 1s ease-out 1.5s forwards;
+    
+}
+
+@keyframes fadein_up {
+    from { top: 28%}
+    to   { top: 25%}
+}
+
+.start-button:hover {
+    width: 15%;
+    background-color: #00838F;
+}
+
+.scroll_down {
+    position: relative;
+    top: 45%; 
+    font-size: 1.8em;
+    color: #BDBDBD;
 }
 
 img {
@@ -105,16 +159,22 @@ img {
 }
 
 .about {
+    color: white;
+    background-color: #1E2223;
     display: -webkit-flex;
     display: flex;
 }
 
 .pubpub_left {
-    flex: 2;
+    -webkit-flex: 2;
+       -moz-flex: 2;
+            flex: 2;
 }
 
 .pubpub_right {
-    flex: 1;
+    -webkit-flex: 1;
+       -moz-flex: 1;
+            flex: 1;
 }
 
 /* Search */

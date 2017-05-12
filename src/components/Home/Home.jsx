@@ -23,7 +23,10 @@ class Home extends React.Component {
           <div className='title'>Lingua</div>
           <div className='subtitle'>Explore | Discover</div>
           <div className='button-container'>
-            <div className='start-button' onClick={this.handleClick}>Begin <i className="fa fa-chevron-right" aria-hidden="true"></i></div>
+            <div className='start-button' onClick={this.handleClick}>Begin</div>
+          </div>
+          <div className='scroll_down'>
+            <i className="fa fa-angle-double-down" aria-hidden="true"></i>
           </div>
         </div>
         
