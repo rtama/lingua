@@ -45,7 +45,6 @@ class Analyze extends React.Component {
         <div className='tool_container'>
           <div className='analyze_header'>
             <p className='analyze_user'>{this.state.user.firstName} {this.state.user.lastName}</p> 
-            <h1>{this.props.match.params.userid}</h1>
           </div>
           <div className='tools'>
             {routes.map((route, index) => (

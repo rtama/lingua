@@ -31,7 +31,8 @@ let pullText = function(fileContents) {
             files.push(pullText(fileContents[i].content))
         }
     }
-    return files
+    let squashedFiles= [].concat.apply([], files)
+    return squashedFiles 
 }
 
 // Return all content for a given user. 
@@ -77,7 +78,6 @@ router.get('/pubs/user/:userid', function(req, res) {
                 let squashedVersions = [].concat.apply([], versions)
                 let versionFilePromises = []
                 squashedVersions.forEach(function(version) {
-                    // console.log("\n version: \n ", version[0].id)
                     versionFilePromises.push(models.VersionFile.findAll({
                         where: {
                             versionId: version.id 
@@ -103,9 +103,10 @@ router.get('/pubs/user/:userid', function(req, res) {
                         let fileContents = filteredFiles.map(function(file) {
                             return JSON.parse(file.content)
                         })
-                        let allText = pullText(fileContents) 
-                        res.send(allText) 
-                        // res.send(fileContents)
+                        // let squashedText = [].concat.apply([], pullText(fileContents))
+                        // res.send(squashedText) 
+                        let text = pullText(fileContents)
+                        res.send(text)
                     })
                 })
             })
