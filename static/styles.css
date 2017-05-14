@@ -329,6 +329,8 @@ th {
     -webkit-flex: 4;
        -moz-flex: 4;
             flex: 4;
+    display: flex;
+    flex-flow: column;
 }
 
 .wordFrequencies {
@@ -336,8 +338,8 @@ th {
 }
 
 /* Content, Word Frequency */
-
 .analyze_header {
+    flex: 0 1 auto;
     position: relative;
     text-align: center;
     background-color: white;
