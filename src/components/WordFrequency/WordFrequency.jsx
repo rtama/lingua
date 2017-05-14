@@ -13,28 +13,50 @@ class WordFrequency extends React.Component {
       prunedWordFrequencies: {},
       mostFrequentWords: [],
       selectedValue: 10,
-      totalWords: 0
+      totalWords: 0,
+      onceWordsCount: 0,
+      stopWordsCount: 0,
+      longestWord: "",
+      frequentWordCount: 0
     }
     this.handleChange = this.handleChange.bind(this)
   }
 
+    // 'pruned': prunedWordFreq,
+    // 'onceWords': onceWords,
+    // 'stopWords': stopWords,
+    // 'totalCount': totalCount,
+    // 'longestWord': longestWord
+    
+    // 'wordArray': wordArray,
+    // 'freqCount': count
+    
   componentDidMount() {
     fetch('/api/pubs/user/' + this.props.match.params.userid).then((response) => {
       return response.json()
     }).then((response) => {
-      let prunedWordFreq = getWordFreq(response)
-      let kFreq = getKMostFreq(prunedWordFreq, 10)  
+      let wordStats = getWordFreq(response)
+      let freqStats = getKMostFreq(wordStats.pruned, 10)  
+      console.log("wordStats: ", wordStats)
+      console.log("freqStats: ", freqStats)
       this.setState({
-        prunedWordFrequencies: prunedWordFreq,
-        mostFrequentWords: kFreq,
+        prunedWordFrequencies: wordStats.pruned,
+        mostFrequentWords: freqStats.wordArray,
+        totalWords: wordStats.totalCount,
+        onceWordsCount: wordStats.onceWords,
+        stopWordsCount: wordStats.stopWords,
+        longestWord: wordStats.longestWord,
+        frequentWordCount: freqStats.freqCount
       }) 
     })
   }
 
   handleChange(event) {
+    let freqStats = getKMostFreq(this.state.prunedWordFrequencies, event.target.value)
     this.setState({
       selectedValue: event.target.value,
-      mostFrequentWords: getKMostFreq(this.state.prunedWordFrequencies, event.target.value)
+      mostFrequentWords: freqStats.wordArray,
+      frequentWordCount: freqStats.freqCount 
     }) 
   }
 
@@ -61,9 +83,9 @@ class WordFrequency extends React.Component {
     // Data Array for pie chart
     let pieChartArray = []
     pieChartArray.push(['FreqOrNot','Frequency'])
-    pieChartArray.push(['All Other Frequencies', Object.keys(this.state.prunedWordFrequencies).length - this.state.mostFrequentWords.length])
-    pieChartArray.push(['Most Frequent', this.state.mostFrequentWords.length])
-
+    pieChartArray.push(['All Other Frequencies', this.state.totalWords - this.state.frequentWordCount])
+    pieChartArray.push(['Most Frequent', this.state.frequentWordCount])
+    console.log("pie chart array: ", pieChartArray)
     return (
       <div className='wordFrequencies'>
         <div className='select_div'>
@@ -85,7 +107,7 @@ class WordFrequency extends React.Component {
               backgroundColor: '#FAFAFA',
               colors: ['#00838F']
             }}
-          /> : <div></div>
+          /> : <div>Sorry, not enough data :( </div>
         } 
         
           <div className='donut_tool'>
@@ -114,9 +136,11 @@ class WordFrequency extends React.Component {
  * Pruned word frequency dictionary (>1 occurence) and reduce stopwords
  * 
  * @param {array<string>} wordsArray
- * @returns {object} 
+ * @returns {Object} 
 */
 function getWordFreq(wordsArray) {
+  let totalCount = 0
+  let longestWord = ''
   let wordFreq = {}
   for (let i=0; i<wordsArray.length; i++) {
     let words = wordsArray[i].replace(/[^\s\w]/g, ' ').split(/\s+/g)
@@ -126,17 +150,36 @@ function getWordFreq(wordsArray) {
       } else {
         wordFreq[words[i]] = 1
       }
+      if (words[i].length > longestWord.length) {
+        longestWord = words[i]
+      }
+      totalCount += 1
     }
   }
+  
   // prune out one count words
   let prunedWordFreq = {}
   let keys= Object.keys(wordFreq)
+  let onceWords = 0
+  let stopWords = 0
   keys.forEach((key) => {
+    if (wordFreq[key] == 1) {
+      onceWords += wordFreq[key] 
+    }
+    if (stopwords.english.includes(key)) {
+      stopWords += wordFreq[key] 
+    }
     if (wordFreq[key] > 1 && key != "" && !(stopwords.english.includes(key))) {
       prunedWordFreq[key] = wordFreq[key]
     } 
   })
-  return prunedWordFreq
+  return {
+    'pruned': prunedWordFreq,
+    'onceWords': onceWords,
+    'stopWords': stopWords,
+    'totalCount': totalCount,
+    'longestWord': longestWord
+  }
 }
 
 /**
@@ -153,12 +196,16 @@ function getKMostFreq(wordDict, k) {
   })
   let spliced = sorted.splice(0, k)  
   let wordArray = []
+  let count = 0
   wordArray.push(['Word', 'Frequency'])
   spliced.forEach((word) => {
     wordArray.push([word, wordDict[word]])   
+    count += wordDict[word]
   })
-  return wordArray
-  
+  return {
+    'wordArray': wordArray,
+    'freqCount': count
+  }
 }
 
 // prop type declarations

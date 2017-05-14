@@ -34,6 +34,9 @@ header {
 }
 
 .back {
+    padding-top: 5px;
+    padding-right: 8px;
+    font-size: 20px;
     cursor: pointer;
     display: inline-block;
     left: 0;
@@ -206,7 +209,8 @@ img {
 }
 
 .search_users_form {
-    background-color: #FAFAFA;
+    /*background-color: #FAFAFA;*/
+    background-color: white;
     position: fixed;
     left: 0;
     right: 0;
@@ -255,7 +259,7 @@ input:focus {
 
 .user_search_table {
     width: 100%;
-    margin: 10px auto;
+    margin: 20px auto;
     border-collapse: collapse;
 }
 
@@ -265,6 +269,7 @@ input:focus {
 
 .data_rows:hover {
     background-color: #ddd;
+    /*background-color: #E0F7FA;*/
 }
 
 td {
@@ -302,6 +307,11 @@ th {
 .sidebar li {
     margin-left: 30px;
     margin-right: 30px;
+    color: #BDBDBD;
+}
+
+.tools_list .tool_selected {
+    color: white;
 }
 
 .sidebar a {
@@ -344,7 +354,7 @@ th {
     text-align: center;
     background-color: white;
     z-index: 100;
-    box-shadow: 1px 1px 5px #888888;
+    box-shadow: 1px 1px 3px #888888;
 }
 
 .analyze_user {

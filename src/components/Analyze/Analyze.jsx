@@ -3,7 +3,7 @@ import fetch from 'isomorphic-fetch';
 import PropTypes from 'prop-types';
 import {
   Route,
-  Link
+  NavLink
 } from 'react-router-dom';
 
 // import child components
@@ -17,6 +17,7 @@ class Analyze extends React.Component {
     this.state = {
       user: {}
     }
+    this.back = this.back.bind(this)
   }
 
   componentDidMount() {
@@ -27,23 +28,30 @@ class Analyze extends React.Component {
     })
   }
 
+  back() {
+    this.props.history.push('/search')
+  }
+
   render(){
     return (
       <div className='analyze'>
         <div className='tools_list sidebar'>
           <ul className='tools_header'>
-            <li><Link to={'/'}>Lingua</Link></li>
+            <li><NavLink to={'/'} activeClassName='tool_selected'>Lingua</NavLink></li>
           </ul>
           <ul>
-            <li><Link to={`${this.props.match.url}/wordfrequency`}>Content</Link></li>
+            <li><NavLink to={`${this.props.match.url}/wordfrequency`} activeClassName='tool_selected'>Content</NavLink></li>
           </ul>
           <ul>
-            <li><Link to={`${this.props.match.url}/followers`}>Followers</Link></li>
+            <li><NavLink to={`${this.props.match.url}/followers`} activeClassName='tool_selected'>Followers</NavLink></li>
           </ul>
         </div>
         <div className='tool_container'>
           <div className='analyze_header'>
-            <p className='analyze_user'>{this.state.user.firstName} {this.state.user.lastName}</p> 
+            <p className='analyze_user'>
+              <i className="fa fa-chevron-left back" aria-hidden="true" onClick={this.back}></i>
+              {this.state.user.firstName} {this.state.user.lastName}
+            </p> 
           </div>
           <div className='tools'>
             <Route path='/analyze/:userid/wordfrequency' render={() => <WordFrequency {...this.props}></WordFrequency>} />
@@ -56,7 +64,8 @@ class Analyze extends React.Component {
 }
 
 Analyze.propTypes = {
-  match: PropTypes.object
+  match: PropTypes.object,
+  history: PropTypes.object
 }
 
 export default Analyze;

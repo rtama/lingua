@@ -10,7 +10,7 @@ class SearchResultsDisplay extends React.Component {
   
   // event handler for click on table row
   handleClick(user) {
-    this.props.history.push('/analyze/' + user.id);
+    this.props.history.push('/analyze/' + user.id+ '/wordFrequency');
   }
 
   render() {
