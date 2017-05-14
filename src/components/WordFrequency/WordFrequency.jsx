@@ -11,8 +11,9 @@ class WordFrequency extends React.Component {
     super(props);
     this.state = {
       prunedWordFrequencies: {},
-      mostFrequent: [],
-      selectedValue: 10
+      mostFrequentWords: [],
+      selectedValue: 10,
+      totalWords: 0
     }
     this.handleChange = this.handleChange.bind(this)
   }
@@ -25,29 +26,29 @@ class WordFrequency extends React.Component {
       let kFreq = getKMostFreq(prunedWordFreq, 10)  
       this.setState({
         prunedWordFrequencies: prunedWordFreq,
-        mostFrequent: kFreq,
+        mostFrequentWords: kFreq,
       }) 
     })
   }
 
   handleChange(event) {
-    console.log("event: ", event.target.value)
     this.setState({
       selectedValue: event.target.value,
-      mostFrequent: getKMostFreq(this.state.prunedWordFrequencies, event.target.value)
+      mostFrequentWords: getKMostFreq(this.state.prunedWordFrequencies, event.target.value)
     }) 
   }
 
   render() {
     let wordFrequencies = []
-    if (this.state.mostFrequent.length > 0) {
-      this.state.mostFrequent.forEach((word, index) => {
+    if (this.state.mostFrequentWords.length > 0) {
+      this.state.mostFrequentWords.forEach((word, index) => {
         wordFrequencies.push(
           <div key={index}>{word}: {this.state.prunedWordFrequencies[word]}</div>
         )
       })
     }
-
+    
+    // Select options
     let options = []
     for (let i=5; i<21; i++) {
       if (i==10) {
@@ -56,29 +57,53 @@ class WordFrequency extends React.Component {
         options.push(<option key={i} value={i}>{i}</option>)       
       }
     }
-    
+
+    // Data Array for pie chart
+    let pieChartArray = []
+    pieChartArray.push(['FreqOrNot','Frequency'])
+    pieChartArray.push(['All Other Frequencies', Object.keys(this.state.prunedWordFrequencies).length - this.state.mostFrequentWords.length])
+    pieChartArray.push(['Most Frequent', this.state.mostFrequentWords.length])
+
     return (
       <div className='wordFrequencies'>
-        <div>
+        <div className='select_div'>
           How many words would you like to view? 
           <select onChange={this.handleChange} value={this.state.selectedValue}>
             {options}
           </select>
         </div>
-        <div>
-          {this.state.mostFrequent.length>1 ? 
+        <div className='content_tool'>
+          {this.state.mostFrequentWords.length>1 ? 
           <Chart
             chartType='BarChart'
-            data={this.state.mostFrequent}
+            data={this.state.mostFrequentWords}
             graphId='BarChart'
-            width={'400px'}
-            height={'400px'}
+            width={'100%'}
+            height={'500px'}
             options={{
-              title: `Top ${this.state.mostFrequent.length-1} Word Frequencies`,
-              backgroundColor: '#FAFAFA'
+              title: `Top ${this.state.mostFrequentWords.length-1} Word Frequencies`,
+              backgroundColor: '#FAFAFA',
+              colors: ['#00838F']
             }}
           /> : <div></div>
-          } 
+        } 
+        
+          <div className='donut_tool'>
+            {this.state.mostFrequentWords.length > 1 ? 
+            <Chart 
+              chartType='PieChart'
+              data={pieChartArray}
+              graphId='PieChart'
+              width={'100%'}
+              height={'300px'}
+              options={{
+                title: `Ratio of Top ${this.state.mostFrequentWords.length-1} Words To Total`,
+                backgroundColor: '#FAFAFA',
+                colors: ['#00838F', '#006064'],
+                pieHole: 0.4
+              }}
+            /> : <div></div>}
+          </div> 
         </div>
       </div>      
     )

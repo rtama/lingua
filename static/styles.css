@@ -207,7 +207,6 @@ img {
 
 .search_users_form {
     background-color: #FAFAFA;
-    /*background-color: #1E2223;*/
     position: fixed;
     left: 0;
     right: 0;
@@ -316,20 +315,53 @@ th {
 }
 
 .tools_header a {
-    font-size: 20px;
+    font-size: 30px;
     color: #FAFAFA;
 }
 
+.tools {
+    height: 100%;
+    overflow: auto;
+}
+
+/* right side tool panel */
 .tool_container {
     -webkit-flex: 4;
        -moz-flex: 4;
             flex: 4;
 }
 
+.wordFrequencies {
+    /*overflow: auto;*/
+}
+
+/* Content, Word Frequency */
+
 .analyze_header {
+    position: relative;
     text-align: center;
+    background-color: white;
+    z-index: 100;
+    box-shadow: 1px 1px 5px #888888;
 }
 
 .analyze_user {
     font-size: x-large;
+    margin: 0;
+    padding-top: 20px;
+    padding-bottom: 15px;
+    border-bottom: 1px #888888 solid;
+}
+
+.select_div { 
+    text-align: center;
+    padding-top: 20px;
+}
+
+.content_tool{
+    width: 100%;
+    z-index: -99;
+}
+
+.donut_tool {
 }
