@@ -3,6 +3,59 @@ import PropTypes from 'prop-types'
 import fetch from 'isomorphic-fetch'
 import stopwords from 'stopwords'
 
+// import child components 
+import { Chart } from 'react-google-charts'
+
+class WordFrequency extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      prunedWordFrequencies: {},
+      mostFrequent: []
+    }
+  }
+
+  componentDidMount() {
+    fetch('/api/pubs/user/' + this.props.match.params.userid).then((response) => {
+      return response.json()
+    }).then((response) => {
+      let prunedWordFreq = getWordFreq(response)
+      let kFreq = getKMostFreq(prunedWordFreq, 10)  
+      this.setState({
+        prunedWordFrequencies: prunedWordFreq,
+        mostFrequent: kFreq 
+      }) 
+    })
+  }
+
+  render() {
+    let wordFrequencies = []
+    if (this.state.mostFrequent.length > 0) {
+      this.state.mostFrequent.forEach((word, index) => {
+        wordFrequencies.push(
+          <div key={index}>{word}: {this.state.prunedWordFrequencies[word]}</div>
+        )
+      })
+    }
+
+    let options = []
+    for (let i=5; i<21; i++) {
+      if (i==10) {
+        options.push(<option value={i} selected='selected'>{i}</option>)
+      } else {
+        options.push(<option value={i}>{i}</option>)       
+      }
+    }
+    
+    return (
+      <div className='wordFrequencies'>
+        <select>{options}</select>
+        <div>{wordFrequencies}</div>
+      </div>      
+    )
+  }
+}
+
 /** 
  * Pruned word frequency dictionary (>1 occurence) and reduce stopwords
  * 
@@ -47,45 +100,6 @@ function getKMostFreq(wordDict, k) {
   return sorted.splice(0, k)  
 }
 
-class WordFrequency extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      prunedWordFrequencies: {},
-      mostFrequent: []
-    }
-  }
-
-  componentDidMount() {
-    fetch('/api/pubs/user/' + this.props.match.params.userid).then((response) => {
-      return response.json()
-    }).then((response) => {
-      let prunedWordFreq = getWordFreq(response)
-      let kFreq = getKMostFreq(prunedWordFreq, 10)  
-      this.setState({
-        prunedWordFrequencies: prunedWordFreq,
-        mostFrequent: kFreq 
-      }) 
-    })
-  }
-
-  render() {
-    let wordFrequencies = []
-    if (this.state.mostFrequent.length > 0) {
-      this.state.mostFrequent.forEach((word, index) => {
-        wordFrequencies.push(
-          <div key={index}>{word}: {this.state.prunedWordFrequencies[word]}</div>
-        )
-      })
-    }
-
-    return (
-      <div className='wordFrequencies'>
-        {wordFrequencies}
-      </div>      
-    )
-  }
-}
 
 WordFrequency.propTypes = {
   match: PropTypes.object

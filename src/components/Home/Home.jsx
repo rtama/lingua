@@ -42,6 +42,14 @@ class Home extends React.Component {
             <img src='../../../static/imgs/pubpublogo.png'/>
           </div>
         </div>
+
+        <div className='about_data'>
+          <div className='data_left'>
+            <div>DATA</div>
+          </div>
+          <div className='data_right'>
+          </div>
+        </div>
         
       </div>
     )

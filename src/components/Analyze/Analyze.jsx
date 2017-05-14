@@ -8,6 +8,7 @@ import {
 
 // import child components
 import WordFrequency from '../WordFrequency/WordFrequency';
+import Followers from '../Followers/Followers'
 
 // Main Analysis component 
 class Analyze extends React.Component {
@@ -30,8 +31,14 @@ class Analyze extends React.Component {
     return (
       <div className='analyze'>
         <div className='tools_list sidebar'>
+          <ul className='tools_header'>
+            <li><Link to={'/'}>Lingua</Link></li>
+          </ul>
           <ul>
-            <li><Link to={`${this.props.match.url}/wordfrequency`}>Word Frequency</Link></li>
+            <li><Link to={`${this.props.match.url}/wordfrequency`}>Content</Link></li>
+          </ul>
+          <ul>
+            <li><Link to={`${this.props.match.url}/followers`}>Followers</Link></li>
           </ul>
         </div>
         <div className='tool_container'>
@@ -40,6 +47,7 @@ class Analyze extends React.Component {
           </div>
           <div className='tools'>
             <Route path='/analyze/:userid/wordfrequency' render={() => <WordFrequency {...this.props}></WordFrequency>} />
+            <Route path='/analyze/:userid/followers' render={() => <Followers {...this.props}></Followers>} />
           </div>
         </div>
       </div>
