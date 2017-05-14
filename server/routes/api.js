@@ -113,6 +113,8 @@ router.get('/pubs/user/:userid', function(req, res) {
     })
  })
 
+// router.get('/followers/user/:userid', function(req, res) {
+// })
 
 
 module.exports = router;

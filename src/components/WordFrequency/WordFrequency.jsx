@@ -11,8 +11,10 @@ class WordFrequency extends React.Component {
     super(props);
     this.state = {
       prunedWordFrequencies: {},
-      mostFrequent: []
+      mostFrequent: [],
+      selectedValue: 10
     }
+    this.handleChange = this.handleChange.bind(this)
   }
 
   componentDidMount() {
@@ -23,9 +25,17 @@ class WordFrequency extends React.Component {
       let kFreq = getKMostFreq(prunedWordFreq, 10)  
       this.setState({
         prunedWordFrequencies: prunedWordFreq,
-        mostFrequent: kFreq 
+        mostFrequent: kFreq,
       }) 
     })
+  }
+
+  handleChange(event) {
+    console.log("event: ", event.target.value)
+    this.setState({
+      selectedValue: event.target.value,
+      mostFrequent: getKMostFreq(this.state.prunedWordFrequencies, event.target.value)
+    }) 
   }
 
   render() {
@@ -41,16 +51,35 @@ class WordFrequency extends React.Component {
     let options = []
     for (let i=5; i<21; i++) {
       if (i==10) {
-        options.push(<option value={i} selected='selected'>{i}</option>)
+        options.push(<option key={i} value={i}>{i}</option>)
       } else {
-        options.push(<option value={i}>{i}</option>)       
+        options.push(<option key={i} value={i}>{i}</option>)       
       }
     }
     
     return (
       <div className='wordFrequencies'>
-        <select>{options}</select>
-        <div>{wordFrequencies}</div>
+        <div>
+          How many words would you like to view? 
+          <select onChange={this.handleChange} value={this.state.selectedValue}>
+            {options}
+          </select>
+        </div>
+        <div>
+          {this.state.mostFrequent.length>1 ? 
+          <Chart
+            chartType='BarChart'
+            data={this.state.mostFrequent}
+            graphId='BarChart'
+            width={'400px'}
+            height={'400px'}
+            options={{
+              title: `Top ${this.state.mostFrequent.length-1} Word Frequencies`,
+              backgroundColor: '#FAFAFA'
+            }}
+          /> : <div></div>
+          } 
+        </div>
       </div>      
     )
   }
@@ -97,10 +126,17 @@ function getKMostFreq(wordDict, k) {
   let sorted = keys.sort((a, b) => {
     return wordDict[b] - wordDict[a]
   })
-  return sorted.splice(0, k)  
+  let spliced = sorted.splice(0, k)  
+  let wordArray = []
+  wordArray.push(['Word', 'Frequency'])
+  spliced.forEach((word) => {
+    wordArray.push([word, wordDict[word]])   
+  })
+  return wordArray
+  
 }
 
-
+// prop type declarations
 WordFrequency.propTypes = {
   match: PropTypes.object
 }
