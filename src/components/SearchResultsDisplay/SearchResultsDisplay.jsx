@@ -17,21 +17,22 @@ class SearchResultsDisplay extends React.Component {
     let tableUsers = [];
 
     // only set headers if there is a result
-    if (this.props.userResults.length > 0) {
+    // if (this.props.userResults.length > 0) {
       tableUsers.push(
         <tr key={0}>
           <th>Username</th>
           <th>First Name</th>
           <th>Last Name</th>
         </tr>)
-    }
-    
-    this.props.userResults.forEach((user) => {
-      tableUsers.push(
-        <SearchResultsDisplayItem key={user.id} user={user} handleClick={this.handleClick}>
-        </SearchResultsDisplayItem> 
-      )
-    })
+    // }
+    if (this.props.userResults.length > 0) {
+      this.props.userResults.forEach((user) => {
+        tableUsers.push(
+          <SearchResultsDisplayItem key={user.id} user={user} handleClick={this.handleClick}>
+          </SearchResultsDisplayItem> 
+        )
+      })
+    } 
 
     return (
       <div className="table_wrapper">

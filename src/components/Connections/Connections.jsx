@@ -145,7 +145,7 @@ class ConnectionsColumn extends React.Component {
     // push header
     connections.push(
       <tr key={0}>
-        <th>{this.props.column} Degree</th>
+        <th>{this.props.column} Degree(s)</th>
       </tr>
     )
     // push rest of data
