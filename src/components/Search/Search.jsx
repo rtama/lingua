@@ -22,10 +22,10 @@ class AnalyzeSearch extends React.Component {
 
   componentDidMount() {
     fetch('/api/').then((response) => {
-      return response.json();
+      return response.json()
     }).then((response) => {
-      this.setState({users: response});
-    });
+      this.setState({users: response})
+    })
   }
 
   /**
@@ -36,12 +36,12 @@ class AnalyzeSearch extends React.Component {
    * @memberOf AnalyzeSearch
    */
   getResults(userValue) {
-    let concatValue = userValue.replace(/\s/g, "").toLowerCase();
+    let concatValue = userValue.replace(/\s/g, "").toLowerCase()
     if (concatValue.length == 0) {return []}
     return this.state.users.filter((user) => {
-      let fullName = (user.firstName + user.lastName).toLowerCase();
+      let fullName = (user.firstName + user.lastName).toLowerCase()
       return user.username.includes(concatValue) || fullName.includes(concatValue)
-     });
+     })
   }
 
 

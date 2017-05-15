@@ -387,7 +387,7 @@ th {
 
 /* right side tool panel */
 .tool_container {
-    -webkit-flex: 4;
+    -webkit-flex: 4;j
        -moz-flex: 4;
             flex: 4;
     display: flex;
@@ -426,5 +426,18 @@ th {
     z-index: -99;
 }
 
-.donut_tool {
+
+/* Connections */
+.connections {
+    height: 100%;
+    display: -webkit-flex;
+    display: -moz-flex;
+    display: flex;
+}
+
+.connections_col {
+    height: 100%;
+    -webkit-flex: 1;
+       -moz-flex: 1;
+            flex: 1;
 }

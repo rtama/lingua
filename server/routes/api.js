@@ -36,16 +36,69 @@ let pullText = function(fileContents) {
     return squashedFiles 
 }
 
-// Get all Followers for a 
-// router.get('/followers/:userid', function(req, res) {
-//     models.FollowsUser.findAll({
-//         where: {
-//             userId: req.params.userid 
-//         }
-//     }).then(function(followers) {
+// Get common contributors
+router.get('/connections/:userid', function(req, res) {
+    models.Contributor.findAll({
+        where: {
+            userId: req.params.userid
+        }
+    }).then(function(contributors) {
+        let promises = []
+        contributors.forEach(function(contributor) {
+            promises.push(models.Pub.find({
+                where: {
+                    id: contributor.pubId,
+                    isPublished: true
+                }
+            }))
+        })
 
-//     })
-// })
+        // Wait for promises to return with all pubs
+        models.sequelize.Promise.all(promises).then(function(pubs) {
+            // All pubs that userid is a contributor to
+            let definedPubs = pubs.filter(function(pub) {
+                return pub
+            })
+            
+            let pubPromises = []
+            definedPubs.forEach(function(pub) {
+                pubPromises.push(models.Contributor.findAll({
+                    where: {
+                        pubId: pub.id,
+                        canEdit: true
+                    }
+                }))
+            })
+            
+            models.sequelize.Promise.all(pubPromises).then(function(newContributors) {
+                let squashedContributors= [].concat.apply([], newContributors)
+                let userids = squashedContributors.map(function(squashedContributor) {
+                    return squashedContributor.userId 
+                })
+
+                // create object to pull keys out of for faster runtime
+                let getUnique = {}
+                userids.forEach(function(id) {
+                    if (!(id in getUnique)) {
+                        getUnique[id] = 1
+                    }
+                })
+                let uniques = Object.keys(getUnique).map(function(key) {
+                    return parseInt(key)
+                })
+                
+                let userPromises = []
+                uniques.forEach(function(u) {
+                    userPromises.push(models.User.findById(u))     
+                })
+                
+                models.sequelize.Promise.all(userPromises).then(function(users) {
+                    res.send(users) 
+                })
+            })
+        })
+    })
+})
 
 // Return all content for a given user. 
 router.get('/pubs/user/:userid', function(req, res) {
@@ -63,14 +116,14 @@ router.get('/pubs/user/:userid', function(req, res) {
                     id: contributor.pubId,
                     isPublished: true
                 }
-            }));
+            }))
         })
         
         // after all pubs found for contributor, look for versions
         models.sequelize.Promise.all(promises).then(function(pubs) {
             // filter out the discussions from pubs
             let filteredPubs = pubs.filter(function(pub) {
-                if (pub && !pub.title.includes('Discussion')) {return pub}
+                return (pub && !pub.title.includes('Discussion'))
             })
 
             let versionPromises= []
@@ -110,7 +163,7 @@ router.get('/pubs/user/:userid', function(req, res) {
                     models.sequelize.Promise.all(filePromises).then(function(files) {
                         // filter files for main.ppub
                         let filteredFiles = files.filter(function(file) {
-                            if (file.name == 'main.ppub'){ return file }
+                            return file.name == 'main.ppub'
                         })
                         let fileContents = filteredFiles.map(function(file) {
                             return JSON.parse(file.content)

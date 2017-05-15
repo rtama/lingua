@@ -1,19 +1,19 @@
-import React from 'react';
-import fetch from 'isomorphic-fetch';
-import PropTypes from 'prop-types';
+import React from 'react'
+import fetch from 'isomorphic-fetch'
+import PropTypes from 'prop-types'
 import {
   Route,
   NavLink
-} from 'react-router-dom';
+} from 'react-router-dom'
 
 // import child components
-import WordFrequency from '../WordFrequency/WordFrequency';
-import Followers from '../Followers/Followers'
+import WordFrequency from '../WordFrequency/WordFrequency'
+import Connections from '../Connections/Connections'
 
 // Main Analysis component 
 class Analyze extends React.Component {
   constructor(props) {
-    super(props);
+    super(props)
     this.state = {
       user: {}
     }
@@ -21,10 +21,13 @@ class Analyze extends React.Component {
   }
 
   componentDidMount() {
+    // fetch this user
     fetch('/api/user/' + this.props.match.params.userid).then((response) => {
-      return response.json(); 
+      return response.json();
     }).then((response) => {
-      this.setState({user: response});
+      this.setState({
+        user: response
+      })
     })
   }
 
@@ -43,7 +46,7 @@ class Analyze extends React.Component {
             <li><NavLink to={`${this.props.match.url}/wordfrequency`} activeClassName='tool_selected'>Content</NavLink></li>
           </ul>
           <ul>
-            <li><NavLink to={`${this.props.match.url}/followers`} activeClassName='tool_selected'>Network</NavLink></li>
+            <li><NavLink to={`${this.props.match.url}/connections`} activeClassName='tool_selected'>Connections</NavLink></li>
           </ul>
         </div>
         <div className='tool_container'>
@@ -55,7 +58,7 @@ class Analyze extends React.Component {
           </div>
           <div className='tools'>
             <Route path='/analyze/:userid/wordfrequency' render={() => <WordFrequency {...this.props}></WordFrequency>} />
-            <Route path='/analyze/:userid/followers' render={() => <Followers {...this.props}></Followers>} />
+            <Route path='/analyze/:userid/connections' render={() => <Connections {...this.props}></Connections>} />
           </div>
         </div>
       </div>

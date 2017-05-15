@@ -37,8 +37,8 @@ class WordFrequency extends React.Component {
     }).then((response) => {
       let wordStats = getWordFreq(response)
       let freqStats = getKMostFreq(wordStats.pruned, 10)  
-      console.log("wordStats: ", wordStats)
-      console.log("freqStats: ", freqStats)
+      // console.log("wordStats: ", wordStats)
+      // console.log("freqStats: ", freqStats)
       this.setState({
         prunedWordFrequencies: wordStats.pruned,
         mostFrequentWords: freqStats.wordArray,
@@ -83,7 +83,7 @@ class WordFrequency extends React.Component {
     // Data Array for pie chart
     let pieChartArray = []
     pieChartArray.push(['Breakdown','Frequency'])
-    pieChartArray.push(['Words', this.state.frequentWordCount])
+    pieChartArray.push(['Frequent Words', this.state.frequentWordCount])
     pieChartArray.push(['Other', this.state.totalWords - this.state.frequentWordCount])
     pieChartArray.push(['Stop Words', this.state.stopWordsCount])
     
@@ -120,7 +120,7 @@ class WordFrequency extends React.Component {
               width={'100%'}
               height={'300px'}
               options={{
-                title: 'Breakdown of dataset',
+                title: 'Breakdown of Dataset',
                 backgroundColor: '#FAFAFA',
                 colors: ['#00838F', '#006064', '#00ACC1']
                 // pieHole: 0.4
