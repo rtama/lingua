@@ -196,7 +196,9 @@ header {
             flex: 1;
 }
 
-img {
+.about img {
+    padding-top: 50px;
+    padding-bottom: 50px;   
     background-color: #1E2223;
     max-height: 200px;
     max-width: 200px;
@@ -211,6 +213,8 @@ img {
 .explore_left div {
     font-size: 2.5em;
     padding: 60px;
+    padding-top: 120px;
+    padding-bottom: 120px;
 }
 
 .explore_left {
@@ -241,8 +245,6 @@ img {
 
 .about_explore {
     font-size: 1.3em;
-    /*color: #BDBDBD;*/
-    /*background-color: #1E2223;*/
     background-color: #FAFAFA;
     color: #1E2223;
     display: -webkit-flex;
@@ -251,7 +253,7 @@ img {
 }
 
 .explore_bot {
-    color: #BDBDBD;
+    color: #9E9E9E;
 }
 
 /* Search */
@@ -387,7 +389,7 @@ th {
 
 /* right side tool panel */
 .tool_container {
-    -webkit-flex: 4;j
+    -webkit-flex: 4;
        -moz-flex: 4;
             flex: 4;
     display: flex;
@@ -429,6 +431,7 @@ th {
 
 /* Connections */
 .connections {
+    padding: 30px;
     height: 100%;
     display: -webkit-flex;
     display: -moz-flex;
@@ -440,4 +443,24 @@ th {
     -webkit-flex: 1;
        -moz-flex: 1;
             flex: 1;
+}
+
+.connections_table {
+    border: 1px solid gray;
+    border-collapse: collapse;
+    width: 100%;
+}
+
+.connections_table th {
+    background-color: #00838F;
+    color: white;
+    border: 1px solid black;
+}
+
+.connections_table td:hover {
+   background-color: #ddd; 
+}
+
+.connections_table, td {
+    border: 1px solid gray;
 }

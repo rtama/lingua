@@ -8,7 +8,7 @@ import {
 
 // import child components
 import WordFrequency from '../WordFrequency/WordFrequency'
-import Connections from '../Connections/Connections'
+import { Connections } from '../Connections/Connections'
 
 // Main Analysis component 
 class Analyze extends React.Component {
