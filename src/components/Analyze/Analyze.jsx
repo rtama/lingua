@@ -43,7 +43,7 @@ class Analyze extends React.Component {
             <li><NavLink to={`${this.props.match.url}/wordfrequency`} activeClassName='tool_selected'>Content</NavLink></li>
           </ul>
           <ul>
-            <li><NavLink to={`${this.props.match.url}/followers`} activeClassName='tool_selected'>Followers</NavLink></li>
+            <li><NavLink to={`${this.props.match.url}/followers`} activeClassName='tool_selected'>Network</NavLink></li>
           </ul>
         </div>
         <div className='tool_container'>

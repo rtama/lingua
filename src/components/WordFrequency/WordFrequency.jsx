@@ -82,10 +82,11 @@ class WordFrequency extends React.Component {
 
     // Data Array for pie chart
     let pieChartArray = []
-    pieChartArray.push(['FreqOrNot','Frequency'])
-    pieChartArray.push(['All Other Frequencies', this.state.totalWords - this.state.frequentWordCount])
-    pieChartArray.push(['Most Frequent', this.state.frequentWordCount])
-    console.log("pie chart array: ", pieChartArray)
+    pieChartArray.push(['Breakdown','Frequency'])
+    pieChartArray.push(['Frequent Words', this.state.frequentWordCount])
+    pieChartArray.push(['Other', this.state.totalWords - this.state.frequentWordCount])
+    pieChartArray.push(['Stop Words', this.state.stopWordsCount])
+    
     return (
       <div className='wordFrequencies'>
         <div className='select_div'>
@@ -119,10 +120,10 @@ class WordFrequency extends React.Component {
               width={'100%'}
               height={'300px'}
               options={{
-                title: `Ratio of Top ${this.state.mostFrequentWords.length-1} Words To Total`,
+                title: 'Breakdown of dataset',
                 backgroundColor: '#FAFAFA',
-                colors: ['#00838F', '#006064'],
-                pieHole: 0.4
+                colors: ['#00838F', '#006064', '#00ACC1']
+                // pieHole: 0.4
               }}
             /> : <div></div>}
           </div> 

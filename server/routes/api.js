@@ -36,6 +36,17 @@ let pullText = function(fileContents) {
     return squashedFiles 
 }
 
+// Get all Followers for a 
+// router.get('/followers/:userid', function(req, res) {
+//     models.FollowsUser.findAll({
+//         where: {
+//             userId: req.params.userid 
+//         }
+//     }).then(function(followers) {
+
+//     })
+// })
+
 // Return all content for a given user. 
 router.get('/pubs/user/:userid', function(req, res) {
     models.Contributor.findAll({
@@ -113,8 +124,7 @@ router.get('/pubs/user/:userid', function(req, res) {
     })
  })
 
-// router.get('/followers/user/:userid', function(req, res) {
-// })
+
 
 
 module.exports = router;
