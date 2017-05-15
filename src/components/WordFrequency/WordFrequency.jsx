@@ -83,7 +83,7 @@ class WordFrequency extends React.Component {
     // Data Array for pie chart
     let pieChartArray = []
     pieChartArray.push(['Breakdown','Frequency'])
-    pieChartArray.push(['Frequent Words', this.state.frequentWordCount])
+    pieChartArray.push(['Words', this.state.frequentWordCount])
     pieChartArray.push(['Other', this.state.totalWords - this.state.frequentWordCount])
     pieChartArray.push(['Stop Words', this.state.stopWordsCount])
     

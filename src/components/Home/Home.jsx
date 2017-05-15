@@ -43,11 +43,15 @@ class Home extends React.Component {
           </div>
         </div>
 
-        <div className='about_data'>
-          <div className='data_left'>
-            <div>DATA</div>
+        <div className='about_explore'>
+          <div className='explore_left'>
+            <div>EXPLORE</div>
           </div>
-          <div className='data_right'>
+          <div className='explore_right'>
+            <div>
+              <div className='explore_top'>Unearth trends and connections within PubPub data</div>
+              <div className='explore_bot'>Search through users and utilize content visualizations</div>
+            </div>
           </div>
         </div>
         
